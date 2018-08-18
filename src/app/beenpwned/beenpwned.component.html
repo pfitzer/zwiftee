@@ -1,0 +1,29 @@
+<form>
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label class="sr-only" for="email">Email:</label>
+            <input class="form-control mb-2" type="email" placeholder="email" name="email" id="email" [(ngModel)]="email" required/>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="btn btn-info mb-2" (click)="getBreachedAccount()">send</button>
+        </div>
+    </div>
+</form>
+<div *ngIf="breachedAccount.length > 1">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Title</th>
+            <th>Name</th>
+            <th>Domain</th>
+            <th>BreachDate</th>
+            <th>AddedDate</th>
+        </tr>
+        <tr *ngFor="let breach of breachedAccount">
+            <td>{{ breach.Title }}</td>
+            <td>{{ breach.Name }}</td>
+            <td>{{ breach.Domain }}</td>
+            <td>{{ breach.BreachDate }}</td>
+            <td>{{ breach.AddedDate }}</td>
+        </tr>
+    </table>
+</div>

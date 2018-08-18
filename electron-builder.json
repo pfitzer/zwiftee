@@ -1,0 +1,38 @@
+{
+  "productName": "zwiftalyze",
+  "directories": {
+    "output": "app-builds"
+  },
+  "files": [
+    "**/*",
+    "!*.ts",
+    "!.idea/",
+    "!LICENSE",
+    "!package.json",
+    "!package-lock.json",
+    "!src/",
+    "!e2e/",
+    "!angular.json",
+    "!karma.conf.js",
+    "!tsconfig.json",
+    "!tslint.json"
+  ],
+  "win": {
+    "icon": "dist",
+    "target": [
+      "portable"
+    ]
+  },
+  "mac": {
+    "icon": "dist",
+    "target": [
+      "dmg"
+    ]
+  },
+  "linux": {
+    "icon": "dist",
+    "target": [
+      "AppImage"
+    ]
+  }
+}
