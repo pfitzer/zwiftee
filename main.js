@@ -1,12 +1,22 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
-const Store = require('./js/store.js');
-const Fit = require('./js/fit');
 
-const store = new Store();
-const fit = new Fit();
-fit.update();
+function startApi() {
+    var express = require("express");
+    var bodyParser = require("body-parser");
+    var routes = require("./routes/routes.js");
+    var app = express();
+
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+
+    routes(app);
+
+    var server = app.listen(3000, function () {
+        console.log("api running on port.", server.address().port);
+    });
+};
 
 let win;
 
@@ -23,7 +33,7 @@ function createWindow () {
         })
     });
     win.setTitle(require('./package.json').name);
-    win.setMenu(null);
+    // win.setMenu(null);
 
 
     win.loadURL(url.format({
@@ -42,7 +52,10 @@ function createWindow () {
 }
 
 // Create window on electron intialization
-app.on('ready', createWindow)
+app.on('ready', function() {
+    startApi();
+    createWindow();
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {

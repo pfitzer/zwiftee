@@ -7,7 +7,6 @@ var Store = require('./store');
 var Fit = class {
     constructor() {
         this.zwiftDir = path.join(homedir, 'Documents\\Zwift\\Activities');
-        this.store = new Store();
     }
 
     getFiles() {
@@ -47,11 +46,7 @@ var Fit = class {
                             'max_cadence': data.activity.sessions[0].max_cadence,
                             'type': data.activity.type
                         };
-                        try {
-                            this.store.insert(data);
-                        } catch (e) {
-                            console.log(err);
-                        }
+                        console.log(toStore);
                     }
                 });
             } catch (e) {

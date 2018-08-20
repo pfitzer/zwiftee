@@ -4,15 +4,13 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
-import { BeenpwnedComponent } from './beenpwned/beenpwned.component';
-import { BeenpwnedHeaderComponent } from './beenpwned-header/beenpwned-header.component';
+import { ZwiftComponent } from './zwift/zwift.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        BeenpwnedComponent,
-        BeenpwnedHeaderComponent
+        ZwiftComponent
     ],
     imports: [
         BrowserModule,
