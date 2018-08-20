@@ -2,11 +2,33 @@ var EasyFit = require('easy-fit').default;
 var path = require('path');
 var fs = require('fs');
 var homedir = require('os').homedir();
-var Store = require('./store');
 
-var Fit = class {
+
+let Fit
+Fit = class {
     constructor() {
-        this.zwiftDir = path.join(homedir, 'Documents\\Zwift\\Activities');
+        this.zwiftDir = path.join(homedir, 'Documents', 'Zwift', 'Activities');
+        this.saveDir = path.join(homedir, '.zwitalyzer');
+        this.sessionsFile = path.join(this.saveDir, 'sessions.json');
+        this.sessions = {};
+        this.sessions.table = [];
+        // todo: fix me
+        if (fs.existsSync(this.sessionsFile, function(err, data) {
+            console.log(data);
+            fs.readFileSync(this.sessionsFile, function (err, content) {
+                this.sessions = JSON.parse(content);
+                console.log(this.sessions);
+            })
+        } else {
+            fs.existsSync(this.saveDir, function(err) {
+                if (err) {
+                    fs.mkdirSync(this.saveDir);
+                    fs.appendFileSync(this.sessionsFile, '{"table": []}', function(err) {
+                        if (err) throw err;
+                    })
+                }
+            });
+        }
     }
 
     getFiles() {
@@ -14,8 +36,7 @@ var Fit = class {
     };
 
     readFile(filePath) {
-        console.log(filePath);
-        fs.readFile(filePath, function (err, content) {
+        fs.readFileSync(filePath, function (err, content) {
             if (content === undefined) return;
             var easyFit = new EasyFit({
                 force: true,
@@ -46,7 +67,8 @@ var Fit = class {
                             'max_cadence': data.activity.sessions[0].max_cadence,
                             'type': data.activity.type
                         };
-                        console.log(toStore);
+                        this.sessions.table.push(toStore);
+                        console.log(this.sessions);
                     }
                 });
             } catch (e) {
@@ -59,7 +81,11 @@ var Fit = class {
         var files = this.getFiles();
         files.forEach(file => {
             this.readFile(path.join(this.zwiftDir, file));
-        })
+        });
+        fs.writeFile(this.sessionsFile, JSON.stringify(this.sessions), function (err) {
+            if (err) throw err;
+            console.log(err);
+        });
     }
 };
 

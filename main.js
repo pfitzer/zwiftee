@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 const url = require('url');
+const Fit = require('./js/fit');
 
 function startApi() {
     var express = require("express");
@@ -17,6 +18,11 @@ function startApi() {
         console.log("api running on port.", server.address().port);
     });
 };
+
+function createData() {
+    var fit = new Fit();
+    fit.update();
+}
 
 let win;
 
@@ -53,6 +59,7 @@ function createWindow () {
 
 // Create window on electron intialization
 app.on('ready', function() {
+    createData();
     startApi();
     createWindow();
 })
