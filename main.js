@@ -31,7 +31,7 @@ function createWindow () {
     win = new BrowserWindow({
         width: 1000,
         height: 800,
-        backgroundColor: '#ffffff',
+        backgroundColor: '#ff610e',
         icon: url.format({
             pathname: path.join(__dirname, 'dist/assets/logo.png'),
             protocol: 'file',

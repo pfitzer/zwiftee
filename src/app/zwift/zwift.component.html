@@ -8,6 +8,26 @@
     </div>
 </nav>
 <div>
+    <legend>Overall Stats</legend>
+    <table class="table table-bordered table-info">
+        <tr>
+            <th>time</th>
+            <th>distance</th>
+            <th>avg. speed</th>
+            <th>avg. cadence</th>
+            <th>avg. heartrate</th>
+        </tr>
+        <tr>
+            <td>{{ overall_time | sec2time }}</td>
+            <td>{{ overall_distance | number:'1.2-2' }}</td>
+            <td>{{ overall_avg_speed | number:'1.2-2' }}</td>
+            <td>{{ overall_cadence | number:'1.0-0' }}</td>
+            <td>{{ overall_avg_heartrate | number:'1.0-0' }}</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <legend>Sessions</legend>
     <table class="table table-bordered table-striped">
         <tr>
             <th>created</th>
