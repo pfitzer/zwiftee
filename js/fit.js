@@ -28,7 +28,7 @@ Fit = class {
                     console.log(err);
                 })
             }
-            this.sessions = {"table": []};
+            this.sessions = {};
         }
     }
 
@@ -36,8 +36,8 @@ Fit = class {
         return fs.readdirSync(this.zwiftDir);
     };
 
-    readFile(filePath) {
-        let content = fs.readFileSync(filePath);
+    readFile(file) {
+        let content = fs.readFileSync(path.join(this.zwiftDir, file));
         var easyFit = new EasyFit({
             force: true,
             speedUnit: 'km/h',
@@ -68,7 +68,9 @@ Fit = class {
                     };
                 }
             });
-            this.sessions.table.push(toStore);
+            if (file in this.sessions === false) {
+                this.sessions[file] = toStore;
+            }
         } catch (e) {
             console.log(e);
         }
@@ -77,9 +79,22 @@ Fit = class {
     update() {
         var files = this.getFiles();
         files.forEach(file => {
-            this.readFile(path.join(this.zwiftDir, file));
+            this.readFile(file);
         });
-        fs.writeFileSync(this.sessionsFile, JSON.stringify(this.sessions));
+        this._writeSessionsFile();
+    }
+
+    _writeSessionsFile() {
+        let buffer = new Buffer(JSON.stringify(this.sessions));
+        fs.open(this.sessionsFile, 'w', function (err, fd) {
+            if (err) throw 'could not open sessions file: ' + err;
+            fs.write(fd, buffer, 0, buffer.length, null, function (err) {
+                if (err) throw 'error writing file: ' + err;
+                fs.close(fd, function () {
+                    console.log('wrote file');
+                })
+            })
+        })
     }
 };
 

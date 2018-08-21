@@ -9,9 +9,9 @@
 </nav>
 <div>
     <table class="table table-bordered table-striped">
-        <ng-template let-session ngFor [ngForOf]="getSessions()">
-            <tr *ngFor="let row of session.items">
-                <td>{{ row.created }}</td>
+        <ng-template ngFor let-session [ngForOf]="sessions">
+            <tr>
+                <td>{{ session.created | date }}</td>
             </tr>
         </ng-template>
     </table>

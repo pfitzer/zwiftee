@@ -9,7 +9,8 @@ var appRouter = function (application) {
     });
 
     application.get("/sessions", function (req, res) {
-        res.status(200).header({"Content-Type": "application/json"}).send(fs.readFileSync(path.join(app.getPath('userData'), 'sessions.json')));
+        let sessions = fs.readFileSync(path.join(app.getPath('userData'), 'sessions.json'));
+        res.status(200).json(JSON.parse(sessions));
     });
 }
 
