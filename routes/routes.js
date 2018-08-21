@@ -5,9 +5,7 @@ var appRouter = function (app) {
     res.status(200).send("Welcome to our restful API");
   });
 
-  app.get("/insertalldata", function(req,res) {
-    var fit = new Fit();
-    fit.update();
+  app.get("/sessions", function(req,res) {
     res.status(201).send('{"data": "data imported"}');
   });
 }
