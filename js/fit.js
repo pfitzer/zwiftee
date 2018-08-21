@@ -6,6 +6,7 @@ var fs = require('fs');
 var homedir = require('os').homedir();
 const {app} = require('electron');
 
+console.log(app.getPath('userData'));
 
 let Fit
 Fit = class {

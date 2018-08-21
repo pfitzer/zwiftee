@@ -11,6 +11,8 @@ import * as $ from 'jquery';
 export class ZwiftComponent implements OnInit {
 
     sessions: Session[];
+    p: 1;
+    collection: any[] = this.sessions;
 
     constructor(private apiService: ApiService) {
     }
