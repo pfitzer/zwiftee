@@ -14,9 +14,9 @@ export class ZwiftComponent implements OnInit {
     ngOnInit() {
     }
 
-    insertData() {
-        this.apiService.insertAllData().subscribe((data: Array<object>) => {
-           console.log(data);
+    getSessions() {
+        this.apiService.getSessions().subscribe((data: Array<object>) => {
+           return data;
         });
     }
 

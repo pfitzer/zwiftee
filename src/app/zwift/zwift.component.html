@@ -2,8 +2,17 @@
     <div class="collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" (click)="insertData()">read all fit files</a>
+                <a class="nav-link">read all fit files</a>
             </li>
         </ul>
     </div>
 </nav>
+<div>
+    <table class="table table-bordered table-striped">
+        <ng-template let-session ngFor [ngForOf]="getSessions()">
+            <tr *ngFor="let row of session.items">
+                <td>{{ row.created }}</td>
+            </tr>
+        </ng-template>
+    </table>
+</div>

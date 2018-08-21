@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Session} from './zwift/models/session.model';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +11,7 @@ export class ApiService {
     constructor(private httpClient: HttpClient) {
     }
 
-    insertAllData() {
-        return this.httpClient.get(`${this.API_URL}/insertalldata`);
+    getSessions() {
+        return this.httpClient.get(`${this.API_URL}/sessions`);
     }
 }
