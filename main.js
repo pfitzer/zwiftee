@@ -40,7 +40,7 @@ function createWindow () {
         })
     });
     win.setTitle(require('./package.json').name);
-    // win.setMenu(null);
+    win.setMenu(null);
 
 
     win.loadURL(url.format({
