@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+
+div.container {
+    margin: 25px auto;
+}
+
+body {
+    background-color: #ff610e !important;
+    font-size: .9em !important;
+    color: #ffffff !important;
+}
+
+.table-info {
+    color: #000000 !important;
+}

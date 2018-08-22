@@ -29,9 +29,10 @@ let win;
 function createWindow () {
     // Create the browser window.
     win = new BrowserWindow({
-        width: 1000,
+        width: 1200,
         height: 800,
         backgroundColor: '#ff610e',
+        useContentSize: true,
         icon: url.format({
             pathname: path.join(__dirname, 'dist/assets/logo.png'),
             protocol: 'file',

@@ -18,6 +18,7 @@ export class ZwiftComponent implements OnInit {
     overall_cadence: number;
     overall_time: number;
     overall_avg_heartrate: number;
+    overall_sessions: number;
 
     constructor(private apiService: ApiService) {
     }
@@ -58,6 +59,7 @@ export class ZwiftComponent implements OnInit {
         this.overall_cadence = cadence / all;
         this.overall_time = time;
         this.overall_avg_heartrate = heartrate / all;
+        this.overall_sessions = all;
     }
 
 }

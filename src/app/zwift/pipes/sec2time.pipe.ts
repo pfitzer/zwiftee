@@ -1,4 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
+import * as dateformat from '../../../../js/dateformat';
 
 @Pipe({
     name: 'sec2time'
@@ -6,7 +7,11 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class Sec2timePipe implements PipeTransform {
 
     transform(value: any, args?: any): any {
-        return new Date(null, null, null, null, null, value).toTimeString().match(/\d{2}:\d{2}:\d{2}/)[0];
+        const date = new Date(null, null, null, null, null, Math.ceil(value));
+        try {
+            return dateformat(date, 'h:MM:ss');
+        } catch (e) {
+        }
     }
 
 }

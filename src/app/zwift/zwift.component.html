@@ -1,8 +1,14 @@
-<nav class="navbar navbar-light bg-light">
-    <div class="collapse" id="navbarSupportedContent">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link">read all fit files</a>
+                <a class="nav-link">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Workouts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">Settings</a>
             </li>
         </ul>
     </div>
@@ -11,6 +17,7 @@
     <legend>Overall Stats</legend>
     <table class="table table-bordered table-info">
         <tr>
+            <th>sessions</th>
             <th>time</th>
             <th>distance</th>
             <th>avg. speed</th>
@@ -18,6 +25,7 @@
             <th>avg. heartrate</th>
         </tr>
         <tr>
+            <td>{{ overall_sessions }}</td>
             <td>{{ overall_time | sec2time }}</td>
             <td>{{ overall_distance | number:'1.2-2' }}</td>
             <td>{{ overall_avg_speed | number:'1.2-2' }}</td>
@@ -47,7 +55,7 @@
             <tr>
                 <td>{{ session.created | date }}</td>
                 <td>{{ session.time_elapsed | sec2time }}</td>
-                <td>{{ session.distance | number }}</td>
+                <td>{{ session.distance | number:'1.2-2' }}</td>
                 <td>{{ session.avg_speed | number }}</td>
                 <td>{{ session.max_speed | number }}</td>
                 <td>{{ session.avg_power }}</td>

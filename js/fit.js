@@ -5,8 +5,9 @@ var path = require('path');
 var fs = require('fs');
 var homedir = require('os').homedir();
 const {app} = require('electron');
+var Preferences = require('../js/preferences');
 
-console.log(app.getPath('userData'));
+let preferences = new Preferences();
 
 let Fit
 Fit = class {
@@ -39,11 +40,12 @@ Fit = class {
 
     readFile(file) {
         let content = fs.readFileSync(path.join(this.zwiftDir, file));
+        let pref = preferences.getPrefs();
         var easyFit = new EasyFit({
             force: true,
-            speedUnit: 'km/h',
-            lengthUnit: 'km',
-            temperatureUnit: 'kelvin',
+            speedUnit: preferences.units[pref.units].speedUnit,
+            lengthUnit: preferences.units[pref.units].lengthUnit,
+            temperatureUnit: preferences.units[pref.units].temperatureUnit,
             elapsedRecordField: true,
             mode: 'cascade',
         });
