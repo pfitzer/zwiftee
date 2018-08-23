@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
-import {Session} from './models/session.model';
+import {Session} from '../models/session.model';
 import * as $ from 'jquery';
 
 @Component({
@@ -34,7 +34,6 @@ export class ZwiftComponent implements OnInit {
                 value.created = new Date(value.created);
                 sessions.push(value);
             });
-            console.log(sessions);
             this.sessions = sessions;
             this._countTotals();
         });

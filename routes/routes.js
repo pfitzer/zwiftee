@@ -25,6 +25,11 @@ var appRouter = function (application) {
     application.get("/preferences", function (req, res) {
         res.status(200).json(prefs.getPrefs());
     })
+
+    application.post("/preferences", function(req, res) {
+        prefs.savePrefs(req.body);
+        res.status(201).json({result: "data saved"});
+    })
 };
 
 module.exports = appRouter;

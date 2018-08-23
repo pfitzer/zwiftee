@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import * as dateformat from '../../../../js/dateformat';
+import * as dateformat from '../../../js/dateformat';
 
 @Pipe({
     name: 'sec2time'

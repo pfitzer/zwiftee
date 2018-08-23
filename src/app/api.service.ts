@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import {Session} from './zwift/models/session.model';
+import {Session} from './models/session.model';
+import {PreferencesModel} from './models/preferences.model';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -15,5 +16,13 @@ export class ApiService {
 
     getSessions(): Observable<Session[]> {
         return this.http.get<Session[]>(`${this.API_URL}/sessions`);
+    }
+
+    getPreferences() {
+        return this.http.get<PreferencesModel>(`${this.API_URL}/preferences`);
+    }
+
+    savePreferences(data: PreferencesModel) {
+        return this.http.post(`${this.API_URL}/preferences`, data);
     }
 }
