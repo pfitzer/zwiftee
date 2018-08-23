@@ -18,7 +18,7 @@ var appRouter = function (application) {
     });
 
     application.get("/sessions", function (req, res) {
-        let sessions = fs.readFileSync(path.join(app.getPath('userData'), 'sessions.json'));
+        let sessions = fs.readFileSync(path.join(app.getPath('userData'), 'data', 'sessions.json'));
         res.status(200).json(JSON.parse(sessions));
     });
 

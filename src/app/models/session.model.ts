@@ -1,6 +1,7 @@
 import {Deserializable} from './deserializable.model';
 
 export class Session implements Deserializable {
+    id: string;
     created: string;
     time_elapsed: number;
     distance: number;

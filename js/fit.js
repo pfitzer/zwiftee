@@ -13,7 +13,7 @@ let Fit
 Fit = class {
     constructor() {
         this.zwiftDir = path.join(homedir, 'Documents', 'Zwift', 'Activities');
-        this.saveDir = app.getPath('userData');
+        this.saveDir = path.join(app.getPath('userData'), 'data');
         this.sessionsFile = path.join(this.saveDir, 'sessions.json');
         this.checkFiles();
     }
@@ -40,6 +40,7 @@ Fit = class {
 
     readFile(file) {
         let content = fs.readFileSync(path.join(this.zwiftDir, file));
+        let basename = path.basename(file, '.fit');
         let pref = preferences.getPrefs();
         var easyFit = new EasyFit({
             force: true,
@@ -51,10 +52,12 @@ Fit = class {
         });
         try {
             let toStore;
+            let sessionData = false;
             easyFit.parse(content, function (error, data) {
                 // Handle result of parse method
                 if ('sessions' in data.activity) {
                     toStore = {
+                        'id': basename,
                         'created': new Date(data.file_id.time_created),
                         'time_elapsed': data.activity.sessions[0].total_elapsed_time,
                         'distance': data.activity.sessions[0].total_distance,
@@ -69,10 +72,15 @@ Fit = class {
                         'max_cadence': data.activity.sessions[0].max_cadence,
                         'type': data.activity.type
                     };
+
+                    sessionData = data.activity.sessions;
                 }
             });
-            if (file in this.sessions === false) {
-                this.sessions[file] = toStore;
+            if (basename in this.sessions === false) {
+                this.sessions[basename] = toStore;
+                if (sessionData) {
+                    this._writeSession(basename, sessionData);
+                }
             }
         } catch (e) {
             console.log(e);
@@ -98,6 +106,13 @@ Fit = class {
                 })
             })
         })
+    }
+
+    _writeSession(id, session) {
+        fs.appendFileSync(path.join(this.saveDir, id + '.json'), JSON.stringify(session), function (err) {
+                    if (err) throw err;
+                    console.log(err);
+                })
     }
 };
 

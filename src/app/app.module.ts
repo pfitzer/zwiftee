@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule} from '@angular/forms';
 import { AlertComponent} from './directives/alert/alert.component';
 import { AlertService} from './alert.service';
+import { ZwiftSessionComponent } from './zwift-session/zwift-session.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AlertService} from './alert.service';
         Sec2timePipe,
         PreferencesComponent,
         HeaderComponent,
-        AlertComponent
+        AlertComponent,
+        ZwiftSessionComponent
     ],
     imports: [
         BrowserModule,
