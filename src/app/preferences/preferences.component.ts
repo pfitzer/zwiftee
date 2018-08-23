@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {ApiService} from '../api.service';
 import {PreferencesModel} from '../models/preferences.model';
+import { AlertService} from '../alert.service';
 
 @Component({
     selector: 'app-preferences',
@@ -19,7 +20,7 @@ export class PreferencesComponent implements OnInit {
 
     locale: string[] = ['de'];
 
-    constructor(private apiService: ApiService) {
+    constructor(private apiService: ApiService, private alertService: AlertService) {
 
     }
 
@@ -43,6 +44,8 @@ export class PreferencesComponent implements OnInit {
         const prefs = new PreferencesModel();
         prefs.units = this.formdata.getRawValue().units;
         prefs.locale = this.formdata.getRawValue().locale;
-        this.apiService.savePreferences(prefs).subscribe((response) => console.log(response));
+        this.apiService.savePreferences(prefs).subscribe((response) => {
+            this.alertService.success(JSON.stringify(response));
+        });
     }
 }

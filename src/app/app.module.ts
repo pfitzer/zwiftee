@@ -12,6 +12,8 @@ import {ApiService} from './api.service';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule} from '@angular/forms';
+import { AlertComponent} from './directives/alert/alert.component';
+import { AlertService} from './alert.service';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { ReactiveFormsModule} from '@angular/forms';
         ZwiftComponent,
         Sec2timePipe,
         PreferencesComponent,
-        HeaderComponent
+        HeaderComponent,
+        AlertComponent
     ],
     imports: [
         BrowserModule,
@@ -30,7 +33,7 @@ import { ReactiveFormsModule} from '@angular/forms';
         AppRoutingModule,
         ReactiveFormsModule
     ],
-    providers: [ApiService],
+    providers: [ApiService, AlertService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
