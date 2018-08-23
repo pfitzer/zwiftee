@@ -1,4 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+::-webkit-scrollbar {
+    background-color: #01b2cc;
+    width: .8em
+}
+
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+    background:  white
+}
 
 div.container {
     margin: 25px auto;
@@ -11,5 +20,5 @@ body {
 }
 
 .table-info {
-    color: #000000 !important;
+    background-color: #01b2cc !important;
 }

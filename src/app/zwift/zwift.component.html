@@ -21,7 +21,7 @@
 </div>
 <div>
     <legend>Sessions</legend>
-    <table class="table table-bordered table-striped">
+    <table id="sessionsList" class="table table-bordered table-striped">
         <tr>
             <th>created</th>
             <th>elapsed time</th>
@@ -35,10 +35,11 @@
             <th>max. heart rate</th>
             <th>avg. cadence</th>
             <th>max. cadence</th>
+            <th>calories</th>
         </tr>
         <ng-template ngFor let-session [ngForOf]="sessions | paginate: { itemsPerPage: 10, currentPage: p }">
             <tr>
-                <td>{{ session.created | date }}</td>
+                <td><a routerLink="/session/{{ session.id }}">{{ session.created | date }}</a></td>
                 <td>{{ session.time_elapsed | sec2time }}</td>
                 <td>{{ session.distance | number:'1.2-2' }}</td>
                 <td>{{ session.avg_speed | number }}</td>
@@ -50,6 +51,7 @@
                 <td>{{ session.max_heart_rate }}</td>
                 <td>{{ session.avg_cadence }}</td>
                 <td>{{ session.max_cadence }}</td>
+                <td>{{ session.total_calories }}</td>
             </tr>
         </ng-template>
     </table>

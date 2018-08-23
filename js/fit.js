@@ -70,6 +70,7 @@ Fit = class {
                         'max_heart_rate': data.activity.sessions[0].max_heart_rate,
                         'avg_cadence': data.activity.sessions[0].avg_cadence,
                         'max_cadence': data.activity.sessions[0].max_cadence,
+                        'total_calories': data.activity.sessions[0].total_calories,
                         'type': data.activity.type
                     };
 

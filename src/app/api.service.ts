@@ -18,6 +18,10 @@ export class ApiService {
         return this.http.get<Session[]>(`${this.API_URL}/sessions`);
     }
 
+    getSession(id) {
+        return this.http.get(`${this.API_URL}/session/` + id);
+    }
+
     getPreferences() {
         return this.http.get<PreferencesModel>(`${this.API_URL}/preferences`);
     }

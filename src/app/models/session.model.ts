@@ -15,6 +15,7 @@ export class Session implements Deserializable {
     avg_cadence: number;
     max_cadence: number;
     type: string;
+    total_calories: number;
 
     deserialize(input: any) {
         Object.assign(this, input);

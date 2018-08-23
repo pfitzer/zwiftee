@@ -22,6 +22,11 @@ var appRouter = function (application) {
         res.status(200).json(JSON.parse(sessions));
     });
 
+    application.get("/session/:id", function (req, res) {
+        let session = fs.readFileSync(path.join(app.getPath('userData'), 'data', req.params.id + '.json'));
+        res.status(200).json(JSON.parse(session));
+    });
+
     application.get("/preferences", function (req, res) {
         res.status(200).json(prefs.getPrefs());
     })
