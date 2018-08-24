@@ -1,5 +1,5 @@
 {
-  "productName": "zwiftalyze",
+  "productName": "zwiftee",
   "directories": {
     "output": "app-builds"
   },
@@ -8,10 +8,12 @@
     "!*.ts",
     "!.idea/",
     "!LICENSE",
+    "!.gitignore",
     "!package.json",
     "!package-lock.json",
     "!src/",
     "!e2e/",
+    "!tmp/",
     "!angular.json",
     "!karma.conf.js",
     "!tsconfig.json",
