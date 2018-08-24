@@ -50,6 +50,7 @@ Fit = class {
             elapsedRecordField: true,
             mode: 'cascade',
         });
+        console.log(easyFit);
         try {
             let toStore;
             let sessionData = false;

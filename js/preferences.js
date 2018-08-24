@@ -15,14 +15,14 @@ Preferences = class {
 
         this.units = {
             metric: {
-                speed: 'km/h',
+                speedUnit: 'km/h',
                 lengthUnit: 'km',
                 temperatureUnit: 'kelvin'
             },
             imperial: {
-                speed: 'mi/h',
+                speedUnit: 'mph',
                 lengthUnit: 'mi',
-                temperatureUnit: 'kelvin'
+                temperatureUnit: 'fahrenheit'
             }
         };
         this.prefFile = path.resolve(app.getPath('userData'), 'preferences.json');

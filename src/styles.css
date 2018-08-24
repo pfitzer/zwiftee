@@ -22,3 +22,8 @@ body {
 .table-info {
     background-color: #01b2cc !important;
 }
+
+a, a:hover, a:active {
+    text-decoration-line: none !important;
+    color: #01b2cc !important;
+}
