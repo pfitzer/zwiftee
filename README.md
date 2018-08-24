@@ -1,4 +1,5 @@
 # zwiftee
+This is still in an alpha state!
 
 A skeleton application to show/analyze your [Zwift](https://zwift.com) activities.
 
