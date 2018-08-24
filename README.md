@@ -1,39 +1,33 @@
-# zwiftalyze
+# zwiftee
 
-A skeleton for an [electron](https://github.com/electron/electron) application with angular version 6. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.
+A skeleton application to show/analyze your [Zwift](https://zwift.com) activities.
 
-#### included frameworks
-* angular 6.1.0
-* bootstrap 4.1.3
-* jquery 3.3.1
-* electron 2.0.7
+##### How it works
+Zwift stores your activities as *.fit file on your commputer under *%userprofile%\documents\Zwift\Activities*. Zwiftee reads those files and show the data.
 
-See *package.json* for full details.
+##### Operating Systems
+Only tested on Windows, yet.
 
-## Development server
+#### Development
+````
+# install
+git clone https://github.com/pfitzer/zwiftee.git
+# install dependencies
+npm install
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# run the app
+npm run electron:build
 
-## Electron App
+# start browser app
+npm start
 
-run `npm run electron` to start the electron app, or `npm run electron-build` to do a production build first.
+# build windows executable
+npm run electron:win
 
-## Code scaffolding
+# see package.json for more
+````
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Contribute
+Feel free to do so, there is pretty much to do. E.g. internationalisation, writing unit tests, test on apple systems ...
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+If you want to contribute, open an issue and describe what you wanna do and commit your work to that issue.

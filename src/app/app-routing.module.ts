@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ZwiftComponent} from './zwift/zwift.component';
 import {PreferencesComponent} from './preferences/preferences.component';
 import { ZwiftSessionComponent} from './zwift-session/zwift-session.component';
+import { WorkoutsComponent} from './workouts/workouts.component';
 
 const routes: Routes = [
     {
@@ -22,6 +23,10 @@ const routes: Routes = [
     {
         path: 'session/:id',
         component: ZwiftSessionComponent
+    },
+    {
+        path: 'workouts',
+        component: WorkoutsComponent
     }
 ];
 

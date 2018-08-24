@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "zwiftalyze": {
+    "zwiftee": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "zwiftalyze:build"
+            "browserTarget": "zwiftee:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "zwiftalyze:build:production"
+              "browserTarget": "zwiftee:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "zwiftalyze:build"
+            "browserTarget": "zwiftee:build"
           }
         },
         "test": {
@@ -105,7 +105,7 @@
         }
       }
     },
-    "zwiftalyze-e2e": {
+    "zwiftee-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -113,11 +113,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "zwiftalyze:serve"
+            "devServerTarget": "zwiftee:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "zwiftalyze:serve:production"
+              "devServerTarget": "zwiftee:serve:production"
             }
           }
         },
@@ -133,5 +133,5 @@
       }
     }
   },
-  "defaultProject": "zwiftalyze"
+  "defaultProject": "zwiftee"
 }

@@ -15,6 +15,7 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { AlertComponent} from './directives/alert/alert.component';
 import { AlertService} from './alert.service';
 import { ZwiftSessionComponent } from './zwift-session/zwift-session.component';
+import { WorkoutsComponent } from './workouts/workouts.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { ZwiftSessionComponent } from './zwift-session/zwift-session.component';
         PreferencesComponent,
         HeaderComponent,
         AlertComponent,
-        ZwiftSessionComponent
+        ZwiftSessionComponent,
+        WorkoutsComponent
     ],
     imports: [
         BrowserModule,

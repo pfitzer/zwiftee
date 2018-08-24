@@ -1,9 +1,9 @@
 {
-  "name": "zwiftalyze",
+  "name": "zwiftee",
   "version": "1.0.0",
   "author": "Michael Pfister",
   "email": "michael@mp-development.de",
-  "url": "https://github.com/pfitzer/zwiftalyze",
+  "url": "https://github.com/pfitzer/zwiftee",
   "license": "MIT",
   "main": "main.js",
   "scripts": {
@@ -17,7 +17,6 @@
     "electron": "electron .",
     "electron:build": "ng build --prod && electron .",
     "build:prod": "npm run build -- -c production",
-    "electron:linux": "npm run build:prod && npx electron-builder build --linux",
     "electron:win": "npm run build:prod && npx electron-builder build --win"
   },
   "private": true,
