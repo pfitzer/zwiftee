@@ -149,7 +149,7 @@ export class ZwiftSessionComponent implements OnInit {
     private extracted(records) {
         let i = 0;
         const ret = [];
-        const maxVal = 150;
+        const maxVal = 250;
         const delta = Math.floor(records.length / maxVal);
         for (i = 0; i < records.length; i = i + delta) {
             ret.push(records[i]);
