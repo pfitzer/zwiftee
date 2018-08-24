@@ -1,7 +1,7 @@
 # zwiftee
-This is still in an alpha state!
+**This is still in an alpha state!**
 
-A skeleton application to show/analyze your [Zwift](https://zwift.com) activities.
+A application to show/analyze your [Zwift](https://zwift.com) activities.
 
 ##### How it works
 Zwift stores your activities as *.fit file on your commputer under *%userprofile%\documents\Zwift\Activities*. Zwiftee reads those files and show the data.

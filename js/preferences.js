@@ -25,7 +25,7 @@ Preferences = class {
                 temperatureUnit: 'fahrenheit'
             }
         };
-        this.prefFile = path.resolve(app.getPath('userData'), 'preferences.json');
+        this.prefFile = path.join(app.getPath('userData'), 'preferences.json');
         this._checkFiles();
     }
 
