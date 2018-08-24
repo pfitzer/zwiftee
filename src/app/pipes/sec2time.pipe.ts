@@ -1,5 +1,4 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import * as dateformat from '../../../js/dateformat';
 
 @Pipe({
     name: 'sec2time'
@@ -19,7 +18,6 @@ export class Sec2timePipe implements PipeTransform {
         if (days > 0) {
             return days + ' days ' + time;
         }
-        ;
         return time;
     }
 
