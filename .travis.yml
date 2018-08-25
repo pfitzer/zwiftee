@@ -1,12 +1,17 @@
 #.travis.yml
 
+sudo: required
+addons:
+  chrome: stable
+
 language: node_js
 node_js:
-- "8.11"
+  - "8.11"
 
 branches:
   only:
   - master
+
 
 before_script:
 - npm install
