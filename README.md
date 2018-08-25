@@ -1,4 +1,6 @@
 # zwiftee
+![](https://api.travis-ci.org/pfitzer/zwiftee.svg?branch=master)
+
 **This is still in an alpha state!**
 
 A application to show/analyze your [Zwift](https://zwift.com) activities.
