@@ -8,6 +8,7 @@ import * as $ from 'jquery';
     templateUrl: './zwift.component.html',
     styleUrls: ['./zwift.component.css']
 })
+
 export class ZwiftComponent implements OnInit {
 
     sessions: Session[];
@@ -60,5 +61,5 @@ export class ZwiftComponent implements OnInit {
         this.overall_avg_heartrate = heartrate / all;
         this.overall_sessions = all;
     }
-
 }
+
