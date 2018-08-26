@@ -1,0 +1,5 @@
+ci:
+  platform:
+    NPM:
+      rxjs-compat:
+        unlicensed: skip
