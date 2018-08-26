@@ -1,2 +1,3 @@
 ci:
-  unlicensed: skip
+  tests:
+    unlicensed: warm
