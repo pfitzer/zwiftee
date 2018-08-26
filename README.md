@@ -1,5 +1,5 @@
 # zwiftee
-![](https://api.travis-ci.org/pfitzer/zwiftee.svg?branch=master) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![](https://dependencyci.com/github/pfitzer/zwiftee/badge)](https://dependencyci.com/github/pfitzer/zwiftee)
+[![Travis-CI](https://api.travis-ci.org/pfitzer/zwiftee.svg?branch=master)](https://travis-ci.org/pfitzer/zwiftee) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![](https://dependencyci.com/github/pfitzer/zwiftee/badge)](https://dependencyci.com/github/pfitzer/zwiftee)
 
 **This is still in an alpha state!**
 
