@@ -9,7 +9,6 @@ import {Sec2timePipe} from './pipes/sec2time.pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {AppComponent} from './app.component';
 import {DebugElement} from '@angular/core';
-import {By} from '@angular/platform-browser';
 import {HeaderComponent} from './header/header.component';
 import {AlertComponent} from './directives/alert/alert.component';
 import {error} from 'util';
