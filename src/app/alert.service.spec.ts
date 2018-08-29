@@ -11,8 +11,8 @@ import {AppComponent} from './app.component';
 import {DebugElement} from '@angular/core';
 import {HeaderComponent} from './header/header.component';
 import {AlertComponent} from './directives/alert/alert.component';
-import {error} from 'util';
-import {Alert} from './models/alert.model';
+import {Alert, AlertType} from './models/alert.model';
+import {Subject} from 'rxjs';
 
 const routes: Routes = [
     {
@@ -53,5 +53,25 @@ describe('AlertService', () => {
         expect(service).toBeTruthy();
         const spy = spyOn(service, 'clear').and.callThrough();
         expect(spy).toHaveBeenCalledTimes(0);
+    });
+
+    it('should set the alert and return right type', () => {
+        const alerts = [
+            {message: 'success', type: AlertType.Success},
+            {message: 'error', type: AlertType.Error},
+            {message: 'info', type: AlertType.Info},
+            {message: 'warn', type: AlertType.Warning},
+        ];
+        let i = 0;
+        alerts.forEach(alert => {
+            const subject = new Subject<Alert>();
+            subject.next(new Alert({message: alert.message, type: alert.type}));
+            service[alert.message]('this is a message');
+            expect(typeof service.getAlert()).toBe(typeof subject.asObservable());
+            service.getAlert().subscribe((alert: Alert) => {
+                expect(alert.type).toBe(alerts[i].type);
+            });
+            i++;
+        });
     });
 });
