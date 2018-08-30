@@ -6,7 +6,12 @@
     margin: 10px 0;
     background-color: white;
     width: 100%;
-    height: 150px;
+    height: 200px;
+}
+
+.workoutElement.z1 {
+    width: 50px;
+    height: 56px;
 }
 
 .z1 {
