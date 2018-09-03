@@ -3,6 +3,5 @@
 /dist/
 /.idea/
 /app-builds/
-*.db
 /tmp/
 /coverage/

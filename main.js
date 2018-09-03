@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron');
+const {app, BrowserWindow} = require('electron');
 const path = require('path');
 const url = require('url');
 const Fit = require('./js/fit');
@@ -26,7 +26,7 @@ function createData() {
 
 let win;
 
-function createWindow () {
+function createWindow() {
     // Create the browser window.
     win = new BrowserWindow({
         width: 1200,
@@ -34,7 +34,7 @@ function createWindow () {
         backgroundColor: '#ff610e',
         useContentSize: true,
         icon: url.format({
-            pathname: path.join(__dirname, 'dist/assets/logo.png'),
+            pathname: path.join(__dirname, 'favicon.png'),
             protocol: 'file',
             slashes: true
         })
@@ -49,17 +49,17 @@ function createWindow () {
         slashes: true
     }));
 
-    //// uncomment below to open the DevTools.
+//// uncomment below to open the DevTools.
     win.webContents.openDevTools()
 
-    // Event when the window is closed.
+// Event when the window is closed.
     win.on('closed', function () {
         win = null
     })
 }
 
 // Create window on electron intialization
-app.on('ready', function() {
+app.on('ready', function () {
     createData();
     startApi();
     createWindow();

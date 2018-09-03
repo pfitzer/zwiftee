@@ -39,6 +39,7 @@ export class WorkoutsComponent implements OnInit {
 
     removeItem() {
         $('#workout svg:last-child').remove();
+        this.clear();
     }
 
     getData(event) {
@@ -47,10 +48,7 @@ export class WorkoutsComponent implements OnInit {
         this.parent = event.srcElement.parentElement;
         this.fokusedWidth = event.srcElement.getBBox().width * 10;
         this.fokusedHeight = event.srcElement.getBBox().height;
-        const svgs = $('#workout rect');
-        $.each(svgs, function (key, ele) {
-            renderer.setAttribute(ele, 'style', 'stroke-width:0;');
-        });
+        this.unsetFocus(renderer);
         this.renderer.setAttribute(this.fokused, 'style', 'stroke-width:2;stroke:rgb(0,0,0)');
     }
 
@@ -63,6 +61,14 @@ export class WorkoutsComponent implements OnInit {
         this.renderer.addClass(this.fokused, this.getCSS());
     }
 
+    duplicate() {
+        const clone = $(this.parent).clone();
+        this.renderer.listen(clone[0], 'click', (ev: any) => this.getData(ev));
+        this.renderer.appendChild(this.workout.nativeElement, clone[0]);
+        this.unsetFocus(this.renderer);
+        this.clear();
+    }
+
     private createSvg(event) {
         const cssClass = event.srcElement.classList[0];
         const svg = this.renderer.createElement('svg', 'svg');
@@ -70,7 +76,7 @@ export class WorkoutsComponent implements OnInit {
         const attributes = this.createStates[cssClass];
 
         this.renderer.setAttribute(svg, 'height', '200');
-        this.renderer.listen(svg, 'click', (ev: any) => this.getData(ev));
+        this.renderer.listen(rect, 'click', (ev: any) => this.getData(ev));
         this.renderer.setAttribute(svg, 'width', '60');
 
         this.renderer.addClass(rect, cssClass);
@@ -92,18 +98,33 @@ export class WorkoutsComponent implements OnInit {
 
     private getCSS() {
         switch (true) {
-            case (this.fokusedHeight <= this.powerZones[0]):
+            case (this.fokusedHeight < this.powerZones[1]):
                 return 'z1';
-            case (this.fokusedHeight > this.powerZones[0] && this.fokusedHeight < this.powerZones[1]):
-                return 'z2';
             case (this.fokusedHeight >= this.powerZones[1] && this.fokusedHeight < this.powerZones[2]):
-                return 'z3';
+                return 'z2';
             case (this.fokusedHeight >= this.powerZones[2] && this.fokusedHeight < this.powerZones[3]):
-                return 'z4';
+                return 'z3';
             case (this.fokusedHeight >= this.powerZones[3] && this.fokusedHeight < this.powerZones[4]):
+                return 'z4';
+            case (this.fokusedHeight >= this.powerZones[4] && this.fokusedHeight < this.powerZones[5]):
                 return 'z5';
             case (this.fokusedHeight >= this.powerZones[5]):
                 return 'z6';
         }
+    }
+
+    private clear() {
+        this.fokusedHeight = null;
+        this.fokusedWidth = null;
+        this.fokused = null;
+        this.parent = null;
+        this.unsetFocus(this.renderer);
+    }
+
+    private unsetFocus(renderer) {
+        const svgs = $('#workout rect');
+        $.each(svgs, function (key, ele) {
+            renderer.setAttribute(ele, 'style', 'stroke-width:0;');
+        });
     }
 }
