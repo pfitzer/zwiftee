@@ -4,17 +4,16 @@ var EasyFit = require('easy-fit').default;
 var path = require('path');
 var fs = require('fs');
 var homedir = require('os').homedir();
-const {app} = require('electron');
-var Preferences = require('../js/preferences');
+var Preferences = require('./preferences')
 
-let preferences = new Preferences();
 
 let Fit
 Fit = class {
-    constructor() {
+    constructor(app) {
         this.zwiftDir = path.join(homedir, 'Documents', 'Zwift', 'Activities');
         this.saveDir = path.join(app.getPath('userData'), 'data');
         this.sessionsFile = path.join(this.saveDir, 'sessions.json');
+        this.preferences = new Preferences(app);
         this.checkFiles();
     }
 
@@ -41,12 +40,12 @@ Fit = class {
     readFile(file) {
         let content = fs.readFileSync(path.join(this.zwiftDir, file));
         let basename = path.basename(file, '.fit');
-        let pref = preferences.getPrefs();
+        let pref = this.preferences.getPrefs();
         var easyFit = new EasyFit({
             force: true,
-            speedUnit: preferences.units[pref.units].speedUnit,
-            lengthUnit: preferences.units[pref.units].lengthUnit,
-            temperatureUnit: preferences.units[pref.units].temperatureUnit,
+            speedUnit: this.preferences.units[pref.units].speedUnit,
+            lengthUnit: this.preferences.units[pref.units].lengthUnit,
+            temperatureUnit: this.preferences.units[pref.units].temperatureUnit,
             elapsedRecordField: true,
             mode: 'cascade',
         });

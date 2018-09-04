@@ -24,6 +24,11 @@
               "src/favicon.icns",
               "src/favicon.256x256.png",
               "src/favicon.512x512.png",
+              "src/tmpl/splash.html",
+              "src/renderer.js",
+              "src/lib/fit.js",
+              "src/lib/preferences.js",
+              "src/lib/routes.js",
               "src/assets"
             ],
             "styles": [

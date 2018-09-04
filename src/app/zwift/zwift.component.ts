@@ -37,6 +37,8 @@ export class ZwiftComponent implements OnInit {
             });
             this.sessions = sessions;
             this._countTotals();
+        }, error => {
+            console.log(error);
         });
     }
 

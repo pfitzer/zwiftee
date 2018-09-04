@@ -29,6 +29,10 @@ const routes: Routes = [
     {
         path: 'workouts',
         component: WorkoutsComponent
+    },
+    {
+        path: '**',
+        redirectTo: 'dashboard'
     }
 ];
 

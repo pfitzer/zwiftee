@@ -2,12 +2,12 @@
 
 var path = require('path');
 var fs = require('fs');
-const {app} = require('electron');
+// const {app} = require('electron').remote;
 
 let Preferences
 
 Preferences = class {
-    constructor() {
+    constructor(app) {
         this.prefs = {
             'units': 'metric',
             'locale': app.getLocale(),

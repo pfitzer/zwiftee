@@ -1,82 +1,123 @@
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 const url = require('url');
-const Fit = require('./js/fit');
 
-function startApi() {
+const startApi = (app) => {
     var express = require("express");
     var bodyParser = require("body-parser");
-    var routes = require("./routes/routes.js");
-    var app = express();
+    var routes = require("./src/lib/routes.js");
+    var application = express();
 
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({extended: true}));
+    application.use(bodyParser.json());
+    application.use(bodyParser.urlencoded({extended: true}));
 
-    routes(app);
+    routes(application, app);
 
-    var server = app.listen(3000, function () {
+    var server = application.listen(3000, function () {
         console.log("api running on port.", server.address().port);
     });
 };
 
-function createData() {
-    var fit = new Fit();
-    fit.update();
+let win;
+let splashWindow;
+
+const createSplashWindow = () => {
+    splashWindow = new BrowserWindow({
+        width: 320,
+        height: 240,
+        frame: false,
+        resizable: false,
+        backgroundColor: '#ff610e',
+        alwaysOnTop: true,
+        show: false,
+        title: 'loading'
+    })
+
+    splashWindow.loadURL(url.format({
+        pathname: path.join(__dirname,'dist', 'tmpl', 'splash.html'),
+        protocol: 'file',
+        slashes: true
+    }))
+
+    splashWindow.on('closed', () => {
+        splashWindow = null
+    })
+
+    splashWindow.once('ready-to-show', () => {
+        splashWindow.show()
+        createWindow('index.html', {
+            width: 1200,
+            height: 900,
+            show: false,
+            backgroundColor: '#ff610e'
+        })
+    })
 }
 
-let win;
-
-function createWindow() {
+const createWindow = (fileStr, options) => {
     // Create the browser window.
-    win = new BrowserWindow({
-        width: 1200,
-        height: 880,
-        backgroundColor: '#ff610e',
-        useContentSize: true,
-        icon: url.format({
-            pathname: path.join(__dirname, 'favicon.png'),
-            protocol: 'file',
-            slashes: true
-        })
-    });
-    win.setTitle(require('./package.json').name);
-    win.setMenu(null);
+    mainWindow = new BrowserWindow(options);
 
-
-    win.loadURL(url.format({
-        pathname: path.join(__dirname, 'dist/index.html'),
+    // and load the index.html of the app.
+    mainWindow.loadURL(url.format({
+        pathname: path.join(__dirname,'dist', 'index.html'),
         protocol: 'file:',
         slashes: true
     }));
 
-//// uncomment below to open the DevTools.
-    win.webContents.openDevTools()
-
-// Event when the window is closed.
-    win.on('closed', function () {
-        win = null
+    // Open the DevTools.
+    // mainWindow.webContents.openDevTools();
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
     })
-}
 
-// Create window on electron intialization
-app.on('ready', function () {
-    createData();
-    startApi();
-    createWindow();
-})
+    // Emitted when the window is closed.
+    mainWindow.on('closed', () => {
+        // Dereference the window object, usually you would store windows
+        // in an array if your app supports multi windows, this is the time
+        // when you should delete the corresponding element.
+        mainWindow = null;
+    });
+};
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', () => {
+    setTimeout(() => {
+        // start api server
+        startApi(app)
+    }, 500)
+    createSplashWindow()
+});
 
 // Quit when all windows are closed.
-app.on('window-all-closed', function () {
-
-    // On macOS specific close process
+app.on('window-all-closed', () => {
+    // On OS X it is common for applications and their menu bar
+    // to stay active until the user quits explicitly with Cmd + Q
     if (process.platform !== 'darwin') {
-        app.quit()
+        app.quit();
     }
-})
+});
 
-app.on('activate', function () {
-    // macOS specific close process
-    if (win === null) {
-        createWindow()
+app.on('activate', () => {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (mainWindow === null) {
+        createWindow('index.html', {
+            width: 1200,
+            height: 900,
+            show: false,
+            backgroundColor: '#ff610e'
+        });
     }
+});
+
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and import them here.
+ipcMain.on('app-init', event => {
+    if(splashWindow) {
+        splashWindow.close()
+    }
+    mainWindow.show()
 })
