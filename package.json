@@ -6,6 +6,22 @@
   "url": "https://github.com/pfitzer/zwiftee",
   "license": "GNU GPLv3",
   "main": "main.js",
+  "build": {
+    "appId": "com.michael-pfister.zwiftee",
+    "copyright": "Copyright ©2018 Michael Pfister",
+    "productName": "Zwiftee",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    }
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
