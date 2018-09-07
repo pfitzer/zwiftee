@@ -1,22 +1,9 @@
 const {app, BrowserWindow, ipcMain} = require('electron');
+const {Router} = require('electron-routes')
 const path = require('path');
 const url = require('url');
-
-const startApi = (app) => {
-    var express = require("express");
-    var bodyParser = require("body-parser");
-    var routes = require("./src/lib/routes.js");
-    var application = express();
-
-    application.use(bodyParser.json());
-    application.use(bodyParser.urlencoded({extended: true}));
-
-    routes(application, app);
-
-    var server = application.listen(3000, function () {
-        console.log("api running on port.", server.address().port);
-    });
-};
+const fs = require('fs')
+const Preferences = require('./dist/lib/preferences');
 
 let win;
 let splashWindow;
@@ -86,7 +73,7 @@ const createWindow = (fileStr, options) => {
 app.on('ready', () => {
     setTimeout(() => {
         // start api server
-        startApi(app)
+        // startApi(app)
     }, 500)
     createSplashWindow()
 });
@@ -113,11 +100,35 @@ app.on('activate', () => {
     }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+// ipc
 ipcMain.on('app-init', event => {
     if(splashWindow) {
         splashWindow.close()
     }
     mainWindow.show()
+})
+
+// api
+const prefs = new Preferences(app);
+const api = new Router('zwiftee');
+
+api.get('sessions', (req, res) => {
+    let sessions = fs.readFileSync(path.join(app.getPath('userData'), 'data', 'sessions.json'), 'utf-8');
+    res.json(JSON.parse(sessions));
+});
+
+api.get('session/:id', (req, res) => {
+    let session = fs.readFileSync(path.join(app.getPath('userData'), 'data', req.params.id + '.json'), 'utf-8');
+    res.json(JSON.parse(session));
+});
+
+api.get("/preferences", function (req, res) {
+    res.json(prefs.getPrefs());
+})
+
+// todo: fix request body. electron request only knows uploadData
+api.post("/preferences", function (req, res) {
+    console.log(req);
+    prefs.savePrefs(req.uploadData[0]);
+    res.json({result: "data saved"});
 })

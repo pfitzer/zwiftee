@@ -31,7 +31,7 @@ describe('ApiService', () => {
             expect(data[1].id).toBe('1-2');
         });
 
-        const req = httpMock.expectOne('http://localhost:3000/sessions');
+        const req = httpMock.expectOne('zwiftee://sessions');
         expect(req.request.method).toBe('GET');
         req.flush([{id: '1-1'}, {id: '1-2'}]);
         httpMock.verify();
@@ -42,7 +42,7 @@ describe('ApiService', () => {
             expect(data.id).toBe('1-1');
         });
 
-        const req = httpMock.expectOne('http://localhost:3000/session/1-1');
+        const req = httpMock.expectOne('zwiftee://session/1-1');
         expect(req.request.method).toBe('GET');
         req.flush({id: '1-1'});
         httpMock.verify();
@@ -53,7 +53,7 @@ describe('ApiService', () => {
             expect(data.locale).toBe('de');
         });
 
-        const req = httpMock.expectOne('http://localhost:3000/preferences');
+        const req = httpMock.expectOne('zwiftee://preferences');
         expect(req.request.method).toBe('GET');
         req.flush({locale: 'de'});
         httpMock.verify();
@@ -65,7 +65,7 @@ describe('ApiService', () => {
             expect(data.locale).toBe('de');
         });
 
-        const req = httpMock.expectOne('http://localhost:3000/preferences');
+        const req = httpMock.expectOne('zwiftee://preferences');
         expect(req.request.method).toBe('POST');
         req.flush(prefs);
         httpMock.verify();

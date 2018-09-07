@@ -5,18 +5,19 @@ import {Session} from './models/session.model';
 import {PreferencesModel} from './models/preferences.model';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+import * as buffer from 'buffer';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
-    API_URL = 'http://localhost:3000';
+    API_URL = 'zwiftee:/';
 
     constructor(private http: HttpClient) {
     }
 
-    getSessions(): Observable<Session[]> {
-        return this.http.get<Session[]>(`${this.API_URL}/sessions`).pipe(
+    getSessions(): Observable<object> {
+        return this.http.get(`${this.API_URL}/sessions`).pipe(
             retry(3),
             catchError(this.handleError)
         );
