@@ -28,7 +28,6 @@
               "src/renderer.js",
               "src/lib/fit.js",
               "src/lib/preferences.js",
-              "src/lib/routes.js",
               "src/assets"
             ],
             "styles": [
