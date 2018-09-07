@@ -10,7 +10,6 @@ import {ZwiftComponent} from './zwift/zwift.component';
 import {Sec2timePipe} from './pipes/sec2time.pipe';
 import {AppRoutingModule} from './app-routing.module';
 import {ApiService} from './api.service';
-import {PreferencesComponent} from './preferences/preferences.component';
 import {HeaderComponent} from './header/header.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {AlertComponent} from './directives/alert/alert.component';
@@ -24,7 +23,6 @@ import {WorkoutsComponent} from './workouts/workouts.component';
         AppComponent,
         ZwiftComponent,
         Sec2timePipe,
-        PreferencesComponent,
         HeaderComponent,
         AlertComponent,
         ZwiftSessionComponent,

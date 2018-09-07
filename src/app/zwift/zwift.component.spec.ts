@@ -5,7 +5,6 @@ import {ApiService} from '../api.service';
 import {Sec2timePipe} from '../pipes/sec2time.pipe';
 import {AppRoutingModule} from '../app-routing.module';
 import {NgxPaginationModule} from 'ngx-pagination';
-import {PreferencesComponent} from '../preferences/preferences.component';
 import {ZwiftSessionComponent} from '../zwift-session/zwift-session.component';
 import {WorkoutsComponent} from '../workouts/workouts.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -29,7 +28,6 @@ describe('ZwiftComponent', () => {
             declarations: [
                 ZwiftComponent,
                 Sec2timePipe,
-                PreferencesComponent,
                 ZwiftSessionComponent,
                 WorkoutsComponent
             ]

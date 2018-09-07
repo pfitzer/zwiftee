@@ -1,7 +1,6 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {AlertComponent} from './alert.component';
-import {ApiService} from '../../api.service';
 import {APP_BASE_HREF} from '@angular/common';
 import {AlertService} from '../../alert.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -9,7 +8,6 @@ import {AppRoutingModule} from '../../app-routing.module';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {HttpClientModule} from '@angular/common/http';
 import {ZwiftComponent} from '../../zwift/zwift.component';
-import {PreferencesComponent} from '../../preferences/preferences.component';
 import {ZwiftSessionComponent} from '../../zwift-session/zwift-session.component';
 import {WorkoutsComponent} from '../../workouts/workouts.component';
 import {Sec2timePipe} from '../../pipes/sec2time.pipe';
@@ -30,7 +28,6 @@ describe('AlertComponent', () => {
             declarations: [
                 AlertComponent,
                 ZwiftComponent,
-                PreferencesComponent,
                 ZwiftSessionComponent,
                 WorkoutsComponent,
                 Sec2timePipe

@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {ZwiftComponent} from './zwift/zwift.component';
-import {PreferencesComponent} from './preferences/preferences.component';
 import { ZwiftSessionComponent} from './zwift-session/zwift-session.component';
 import { WorkoutsComponent} from './workouts/workouts.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -17,10 +16,6 @@ const routes: Routes = [
     {
         path: 'dashboard',
         component: ZwiftComponent
-    },
-    {
-        path: 'settings',
-        component: PreferencesComponent
     },
     {
         path: 'session/:id',

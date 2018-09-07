@@ -1,9 +1,84 @@
-const {app, BrowserWindow, ipcMain} = require('electron');
+const {app, BrowserWindow, ipcMain, Menu} = require('electron');
 const {Router} = require('electron-routes')
 const path = require('path');
 const url = require('url');
 const fs = require('fs')
 const Preferences = require('./dist/lib/preferences');
+
+let template = [
+    {
+        label: 'File',
+        submenu: [
+            {
+                label: 'Settings',
+                role: 'settings'
+            }
+        ]
+    },
+    {
+        label: 'Edit',
+        submenu: [
+            {
+                label: 'Undo',
+                accelerator: 'CmdOrCtrl+Z',
+                role: 'undo'
+            },
+            {
+                label: 'Redo',
+                accelerator: 'Shift+CmdOrCtrl+Z',
+                role: 'redo'
+            },
+            {
+                type: 'separator'
+            },
+            {
+                label: 'Cut',
+                accelerator: 'CmdOrCtrl+X',
+                role: 'cut'
+            },
+            {
+                label: 'Copy',
+                accelerator: 'CmdOrCtrl+C',
+                role: 'copy'
+            },
+            {
+                label: 'Paste',
+                accelerator: 'CMdOrCtrl+V',
+                role: 'paste'
+            },
+            {
+                label: 'Select All',
+                accelerator: 'CmdOrCtrl+A',
+                role: 'selectall'
+            },
+            {
+                type: 'separator'
+            },
+            {
+                label: 'My Submenu',
+                submenu: [{
+                    label: 'Menu Item 1',
+                    type: 'checkbox',
+                    checked: true
+                }, {
+                    label: 'Menu Item 2'
+                }]
+            }]
+    }]
+
+if (process.platform === 'darwin') {
+    const name = app.getName();
+    template.unshift({
+        label: name,
+        submenu: [{
+            label: 'Quit',
+            accelerator: 'Command+Q',
+            click: function () {
+                app.quit()
+            }
+        }]
+    })
+}
 
 let win;
 let splashWindow;
@@ -21,7 +96,7 @@ const createSplashWindow = () => {
     })
 
     splashWindow.loadURL(url.format({
-        pathname: path.join(__dirname,'dist', 'tmpl', 'splash.html'),
+        pathname: path.join(__dirname, 'dist', 'tmpl', 'splash.html'),
         protocol: 'file',
         slashes: true
     }))
@@ -47,7 +122,7 @@ const createWindow = (fileStr, options) => {
 
     // and load the index.html of the app.
     mainWindow.loadURL(url.format({
-        pathname: path.join(__dirname,'dist', 'index.html'),
+        pathname: path.join(__dirname, 'dist', 'index.html'),
         protocol: 'file:',
         slashes: true
     }));
@@ -71,9 +146,9 @@ const createWindow = (fileStr, options) => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+    const menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
     setTimeout(() => {
-        // start api server
-        // startApi(app)
     }, 500)
     createSplashWindow()
 });
@@ -95,14 +170,15 @@ app.on('activate', () => {
             width: 1200,
             height: 900,
             show: false,
-            backgroundColor: '#ff610e'
+            backgroundColor: '#ff610e',
+            titleBarStyle: 'hiddenInset'
         });
     }
 });
 
 // ipc
 ipcMain.on('app-init', event => {
-    if(splashWindow) {
+    if (splashWindow) {
         splashWindow.close()
     }
     mainWindow.show()
@@ -121,14 +197,3 @@ api.get('session/:id', (req, res) => {
     let session = fs.readFileSync(path.join(app.getPath('userData'), 'data', req.params.id + '.json'), 'utf-8');
     res.json(JSON.parse(session));
 });
-
-api.get("/preferences", function (req, res) {
-    res.json(prefs.getPrefs());
-})
-
-// todo: fix request body. electron request only knows uploadData
-api.post("/preferences", function (req, res) {
-    console.log(req);
-    prefs.savePrefs(req.uploadData[0]);
-    res.json({result: "data saved"});
-})

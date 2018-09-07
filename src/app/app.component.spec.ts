@@ -1,15 +1,14 @@
-import {TestBed, async} from '@angular/core/testing';
+import {async, TestBed} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
 import {AlertComponent} from './directives/alert/alert.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ZwiftComponent} from './zwift/zwift.component';
 import {ZwiftSessionComponent} from './zwift-session/zwift-session.component';
-import {PreferencesComponent} from './preferences/preferences.component';
 import {WorkoutsComponent} from './workouts/workouts.component';
 import {Sec2timePipe} from './pipes/sec2time.pipe';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { APP_BASE_HREF } from '@angular/common';
+import {APP_BASE_HREF} from '@angular/common';
 import {AlertService} from './alert.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 
@@ -22,7 +21,6 @@ describe('AppComponent', () => {
                 AlertComponent,
                 ZwiftComponent,
                 ZwiftSessionComponent,
-                PreferencesComponent,
                 WorkoutsComponent,
                 Sec2timePipe
             ],

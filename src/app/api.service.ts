@@ -1,11 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import {Session} from './models/session.model';
-import {PreferencesModel} from './models/preferences.model';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import * as buffer from 'buffer';
+import {Observable, throwError} from 'rxjs';
+import {catchError, retry} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
@@ -28,17 +25,6 @@ export class ApiService {
             retry(3),
             catchError(this.handleError)
         );
-    }
-
-    getPreferences() {
-        return this.http.get<PreferencesModel>(`${this.API_URL}/preferences`).pipe(
-            retry(3),
-            catchError(this.handleError)
-        );
-    }
-
-    savePreferences(data: PreferencesModel) {
-        return this.http.post(`${this.API_URL}/preferences`, data);
     }
 
     private  handleError(error: HttpErrorResponse) {
