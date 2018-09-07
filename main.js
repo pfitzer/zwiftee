@@ -12,6 +12,13 @@ let template = [
             {
                 label: 'Settings',
                 role: 'settings'
+            },
+            {
+                type: 'separator'
+            },
+            {
+                label: 'Exit',
+                role: 'quit'
             }
         ]
     },
@@ -50,34 +57,55 @@ let template = [
                 label: 'Select All',
                 accelerator: 'CmdOrCtrl+A',
                 role: 'selectall'
-            },
-            {
-                type: 'separator'
-            },
-            {
-                label: 'My Submenu',
-                submenu: [{
-                    label: 'Menu Item 1',
-                    type: 'checkbox',
-                    checked: true
-                }, {
-                    label: 'Menu Item 2'
-                }]
             }]
-    }]
+    },
+    {
+        label: 'View',
+        submenu: [
+            {role: 'resetzoom'},
+            {role: 'zoomin'},
+            {role: 'zoomout'},
+            {type: 'separator'},
+            {role: 'togglefullscreen'}
+        ]
+    },]
 
 if (process.platform === 'darwin') {
-    const name = app.getName();
     template.unshift({
-        label: name,
-        submenu: [{
-            label: 'Quit',
-            accelerator: 'Command+Q',
-            click: function () {
-                app.quit()
-            }
-        }]
+        label: app.getName(),
+        submenu: [
+            {role: 'about'},
+            {type: 'separator'},
+            {role: 'services', submenu: []},
+            {type: 'separator'},
+            {role: 'hide'},
+            {role: 'hideothers'},
+            {role: 'unhide'},
+            {type: 'separator'},
+            {role: 'quit'}
+        ]
     })
+
+    // Edit menu
+    template[1].submenu.push(
+        {type: 'separator'},
+        {
+            label: 'Speech',
+            submenu: [
+                {role: 'startspeaking'},
+                {role: 'stopspeaking'}
+            ]
+        }
+    )
+
+    // Window menu
+    template[3].submenu = [
+        {role: 'close'},
+        {role: 'minimize'},
+        {role: 'zoom'},
+        {type: 'separator'},
+        {role: 'front'}
+    ]
 }
 
 let win;
