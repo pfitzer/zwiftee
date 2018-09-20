@@ -30,6 +30,9 @@ Preferences = class {
     }
 
     _checkFiles() {
+        if (!fs.existsSync(path.dirname(this.prefFile))) {
+            fs.mkdirSync(path.dirname(this.prefFile));
+        }
         if (!fs.existsSync(this.prefFile)) {
             fs.appendFileSync(this.prefFile, JSON.stringify(this.prefs), function (err) {
                 if (err) throw err;
