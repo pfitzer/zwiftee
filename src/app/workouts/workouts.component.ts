@@ -37,6 +37,14 @@ export class WorkoutsComponent implements OnInit {
         this.createSvg(event);
     }
 
+    addWarmup(event) {
+        this.coolAndWarm(event, 'M1,200 L60,200 L60,125 L1,155 Z');
+    }
+
+    addCooldown(event) {
+        this.coolAndWarm(event, 'M1,200 L60,200 L60,155 L1,125 Z');
+    }
+
     removeItem() {
         $('#workout svg:last-child').remove();
         this.clear();
@@ -84,6 +92,20 @@ export class WorkoutsComponent implements OnInit {
             this.renderer.setAttribute(rect, key, attributes[key]);
         });
         this.renderer.appendChild(svg, rect);
+        this.renderer.appendChild(this.workout.nativeElement, svg);
+    }
+
+    private coolAndWarm(event, value) {
+        const cssClass = event.srcElement.classList[0];
+        const svg = this.renderer.createElement('svg', 'svg');
+        const path = this.renderer.createElement('path', 'svg');
+        const attributes = this.createStates[cssClass];
+        this.renderer.setAttribute(path, 'd', value);
+        this.renderer.setAttribute(svg, 'height', '200');
+        this.renderer.setAttribute(svg, 'width', '60');
+
+        this.renderer.addClass(path, cssClass);
+        this.renderer.appendChild(svg, path);
         this.renderer.appendChild(this.workout.nativeElement, svg);
     }
 
